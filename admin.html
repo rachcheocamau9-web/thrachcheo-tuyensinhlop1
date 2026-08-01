@@ -47,7 +47,11 @@
   <form id="form-login">
     <div class="field">
       <label>Mật khẩu quản trị</label>
-      <input type="text" name="matKhau" required placeholder="Nhập mật khẩu">
+      <div style="position:relative;">
+        <input type="password" name="matKhau" required placeholder="Nhập mật khẩu" style="padding-right:44px;">
+        <button type="button" id="btn-hien-mat-khau" aria-label="Hiện/ẩn mật khẩu"
+          style="position:absolute; right:8px; top:50%; transform:translateY(-50%); background:none; border:none; cursor:pointer; font-size:17px; padding:4px;">👁️</button>
+      </div>
     </div>
     <button type="submit" class="btn btn--dat btn--full" id="btn-login">Đăng nhập</button>
   </form>
@@ -177,6 +181,15 @@
 <script src="js/main.js"></script>
 <script>
 let PHIEN_DANG_NHAP = sessionStorage.getItem('rc_admin_token') || null;
+
+// ---------- Nút hiện/ẩn mật khẩu ----------
+const btnHienMatKhau = document.getElementById('btn-hien-mat-khau');
+const inputMatKhau = document.querySelector('input[name=matKhau]');
+btnHienMatKhau.addEventListener('click', () => {
+  const dangAn = inputMatKhau.type === 'password';
+  inputMatKhau.type = dangAn ? 'text' : 'password';
+  btnHienMatKhau.textContent = dangAn ? '🙈' : '👁️';
+});
 
 const khuLogin = document.getElementById('khu-dang-nhap');
 const khuAdmin = document.getElementById('khu-quan-tri');
